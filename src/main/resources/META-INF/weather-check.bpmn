@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0vnu66m" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.3.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:process id="Process_0sgd6dn" name="Weather Check" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1ltm2aq</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1ltm2aq" sourceRef="StartEvent_1" targetRef="Activity_1gzizmq" />
+    <bpmn:exclusiveGateway id="Gateway_03nwl6e">
+      <bpmn:incoming>Flow_0ty8ucn</bpmn:incoming>
+      <bpmn:outgoing>Flow_0l19v06</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1gxbu63</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0ty8ucn" sourceRef="Activity_1gzizmq" targetRef="Gateway_03nwl6e" />
+    <bpmn:sequenceFlow id="Flow_0l19v06" name="the weather is good" sourceRef="Gateway_03nwl6e" targetRef="Activity_12jnk2x">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${weather}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1gxbu63" name="the weather is bad" sourceRef="Gateway_03nwl6e" targetRef="Activity_1kr2s3j">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!weather}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_079smio">
+      <bpmn:incoming>Flow_1tt3xg7</bpmn:incoming>
+      <bpmn:incoming>Flow_0w0tm5e</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1tt3xg7" sourceRef="Activity_12jnk2x" targetRef="Event_079smio" />
+    <bpmn:sequenceFlow id="Flow_0w0tm5e" sourceRef="Activity_1kr2s3j" targetRef="Event_079smio" />
+    <bpmn:serviceTask id="Activity_1gzizmq" name="Check the weather" camunda:delegateExpression="${checkTheWeatherDelegate}">
+      <bpmn:incoming>Flow_1ltm2aq</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ty8ucn</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Activity_1kr2s3j" name="Play chess">
+      <bpmn:incoming>Flow_1gxbu63</bpmn:incoming>
+      <bpmn:outgoing>Flow_0w0tm5e</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_12jnk2x" name="Play football">
+      <bpmn:incoming>Flow_0l19v06</bpmn:incoming>
+      <bpmn:outgoing>Flow_1tt3xg7</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0sgd6dn">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_03nwl6e_di" bpmnElement="Gateway_03nwl6e" isMarkerVisible="true">
+        <dc:Bounds x="515" y="152" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_079smio_di" bpmnElement="Event_079smio">
+        <dc:Bounds x="932" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fkky2b_di" bpmnElement="Activity_1gzizmq">
+        <dc:Bounds x="310" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0tftxh3_di" bpmnElement="Activity_1kr2s3j">
+        <dc:Bounds x="670" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09mcnlg_di" bpmnElement="Activity_12jnk2x">
+        <dc:Bounds x="670" y="40" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1ltm2aq_di" bpmnElement="Flow_1ltm2aq">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="310" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ty8ucn_di" bpmnElement="Flow_0ty8ucn">
+        <di:waypoint x="410" y="177" />
+        <di:waypoint x="515" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0l19v06_di" bpmnElement="Flow_0l19v06">
+        <di:waypoint x="540" y="152" />
+        <di:waypoint x="540" y="80" />
+        <di:waypoint x="670" y="80" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="546" y="46" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1gxbu63_di" bpmnElement="Flow_1gxbu63">
+        <di:waypoint x="540" y="202" />
+        <di:waypoint x="540" y="270" />
+        <di:waypoint x="670" y="270" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="545" y="283" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tt3xg7_di" bpmnElement="Flow_1tt3xg7">
+        <di:waypoint x="770" y="80" />
+        <di:waypoint x="851" y="80" />
+        <di:waypoint x="851" y="177" />
+        <di:waypoint x="932" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0w0tm5e_di" bpmnElement="Flow_0w0tm5e">
+        <di:waypoint x="770" y="270" />
+        <di:waypoint x="851" y="270" />
+        <di:waypoint x="851" y="177" />
+        <di:waypoint x="932" y="177" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
