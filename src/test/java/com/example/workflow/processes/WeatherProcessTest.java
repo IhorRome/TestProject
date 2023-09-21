@@ -37,7 +37,8 @@ public class WeatherProcessTest {
 
     @BeforeEach
     void setUp() {
-        Mocks.register("checkTheWeatherDelegate", new CheckTheWeatherDelegate(new WeatherService(runtimeService, taskService)));
+        Mocks.register("checkTheWeatherDelegate",
+                new CheckTheWeatherDelegate(new WeatherService(runtimeService, taskService)));
     }
     @Test
     void shouldHaveActiveProcessInstance() {

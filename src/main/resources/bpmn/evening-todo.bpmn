@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_157nbun" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.3.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+  <bpmn:process id="EveningToDo" isExecutable="true">
+    <bpmn:serviceTask id="Activity_13vi1kk" name="What would you like to do?" camunda:delegateExpression="${whatToDoDelegate}">
+      <bpmn:incoming>Flow_10g7jhj</bpmn:incoming>
+      <bpmn:outgoing>Flow_1rqwkbw</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1qj2m7s</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1amj9rz</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_10g7jhj" sourceRef="StartEvent_1" targetRef="Activity_13vi1kk" />
+    <bpmn:sequenceFlow id="Flow_1rqwkbw" name="to watch movie" sourceRef="Activity_13vi1kk" targetRef="Choice">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${toWatchMovie}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1qj2m7s" name="to have snack" sourceRef="Activity_13vi1kk" targetRef="Choice">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${toHaveSnack}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:task id="Activity_0anywmn" name="Result">
+      <bpmn:incoming>Flow_180snym</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pvm8ck</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_180snym" sourceRef="Choice" targetRef="Activity_0anywmn" />
+    <bpmn:sequenceFlow id="Flow_0pvm8ck" sourceRef="Activity_0anywmn" targetRef="Event_13ufzrv" />
+    <bpmn:endEvent id="Event_13ufzrv">
+      <bpmn:incoming>Flow_0pvm8ck</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1rafwvo" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1amj9rz" name="to have drink" sourceRef="Activity_13vi1kk" targetRef="Choice">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${toHaveDrink}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Choice" name="Make your choice">
+      <bpmn:incoming>Flow_1qj2m7s</bpmn:incoming>
+      <bpmn:incoming>Flow_1rqwkbw</bpmn:incoming>
+      <bpmn:incoming>Flow_1amj9rz</bpmn:incoming>
+      <bpmn:outgoing>Flow_180snym</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_10g7jhj</bpmn:outgoing>
+    </bpmn:startEvent>
+  </bpmn:process>
+  <bpmn:message id="Message_09r6evg" name="Hungry" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="EveningToDo">
+      <bpmndi:BPMNShape id="Activity_1ybabro_di" bpmnElement="Activity_13vi1kk">
+        <dc:Bounds x="310" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0anywmn_di" bpmnElement="Activity_0anywmn">
+        <dc:Bounds x="780" y="137" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0da9npq_di" bpmnElement="Event_13ufzrv">
+        <dc:Bounds x="1042" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1w6jwwc_di" bpmnElement="Choice">
+        <dc:Bounds x="530" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1rcbi8d_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_10g7jhj_di" bpmnElement="Flow_10g7jhj">
+        <di:waypoint x="215" y="177" />
+        <di:waypoint x="310" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1rqwkbw_di" bpmnElement="Flow_1rqwkbw">
+        <di:waypoint x="360" y="137" />
+        <di:waypoint x="360" y="90" />
+        <di:waypoint x="580" y="90" />
+        <di:waypoint x="580" y="137" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="434" y="73" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1qj2m7s_di" bpmnElement="Flow_1qj2m7s">
+        <di:waypoint x="410" y="177" />
+        <di:waypoint x="530" y="177" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="437" y="160" width="68" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_180snym_di" bpmnElement="Flow_180snym">
+        <di:waypoint x="630" y="177" />
+        <di:waypoint x="780" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pvm8ck_di" bpmnElement="Flow_0pvm8ck">
+        <di:waypoint x="880" y="177" />
+        <di:waypoint x="1042" y="177" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1amj9rz_di" bpmnElement="Flow_1amj9rz">
+        <di:waypoint x="360" y="217" />
+        <di:waypoint x="360" y="260" />
+        <di:waypoint x="580" y="260" />
+        <di:waypoint x="580" y="217" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="438" y="242" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
